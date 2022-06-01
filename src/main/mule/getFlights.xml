@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="9440bc3d-aa48-4e1f-9a37-47327f0d0fd9" basePath="/essentials/united" >
+		<http:request-connection host="mu.mulesoft-training.com" port="80" />
+	</http:request-config>
+	<sub-flow name="getFlightsSubFlow" doc:id="7f91fffe-b67e-4f0b-9c37-73b49ce92579" >
+		<logger level="INFO" doc:name="Info: Start Logger" doc:id="fe1af9ba-36ca-45ab-b8c5-ff3c84ee196b" message="Flow start logger /flights/#[attributes.queryParams.destination]"/>
+		<http:request method="GET" doc:name="Request" doc:id="1a2af09a-f3f6-45d5-b692-3aa7f32aad96" config-ref="HTTP_Request_configuration" path="/flights/{destinationValue}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"destinationValue" : attributes.queryParams.destination
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Info: End Logger" doc:id="c6877d8a-ef67-4e12-b8af-4106c1a5a86c" message="Flow end logger"/>
+	</sub-flow>
+</mule>
