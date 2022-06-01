@@ -1,0 +1,25 @@
+#%RAML 1.0
+title: Sysstem API for United airlines
+version: v1
+protocols:
+  - HTTP
+description: syetem api to get flight information
+#created by amarndh on 01-06-2022 added GET flights
+mediaType: 
+- application/json
+documentation:
+  - title: System API For Naukri DB.
+    content: !include libraries/documentation.md
+traits:
+  clientcredentials: !include libraries/traits/clientcredentials.raml
+  queryParamsgetflights: !include libraries/traits/queryParamGetFlights.raml
+resourceTypes:
+  flightsResourceType: !include libraries/patterns/flightsResource.raml  
+/flights:
+  type: flightsResourceType
+   
+   
+   
+              
+
+

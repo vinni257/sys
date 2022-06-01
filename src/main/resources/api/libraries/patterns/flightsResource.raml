@@ -1,0 +1,11 @@
+#%RAML 1.0 ResourceType
+ get:
+    is:
+      - clientcredentials
+      - queryParamsgetflights
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include ../examples/responses/getFlights.json
+            
